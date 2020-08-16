@@ -1,0 +1,28 @@
+URL: <input id="url" value="http://127.0.0.1:3000" /> amount:
+<input value="100" id="amount" type="number" />
+<button onclick="test()">Run test</button>
+<br />
+<h2 id="time">Time:</h2>
+<script>
+  function test() {
+    request(
+      document.getElementById("url").value,
+      parseInt(document.getElementById("amount").value)
+    );
+  }
+  function request(url, requests) {
+    const options = {
+      method: "GET",
+      mode: "no-cors",
+    };
+    var start = Date.now();
+    for (var i = 0; i < requests; i++) {
+      fetch(url, options)
+        .then((response) => console.log(response))
+        .then(() => {
+          document.getElementById("time").innerHTML =
+            "Time: " + (Date.now() - start);
+        });
+    }
+  }
+</script>
